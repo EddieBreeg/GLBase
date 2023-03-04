@@ -8,3 +8,5 @@ lib/
 !deps/glew/build
 deps/glew/build/CMakeFiles
 deps/glew/build/.cmake
+deps/glew/build/CMakeCache.txt
+deps/glew/build/compile_commands.json
