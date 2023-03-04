@@ -6,6 +6,5 @@ lib/
 
 
 !deps/glew/build
-deps/glew/build/*
-
-!deps/glew/build/cmake
+deps/glew/build/CMakeFiles
+deps/glew/build/.cmake
