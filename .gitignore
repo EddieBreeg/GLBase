@@ -4,4 +4,8 @@ lib/
 .vscode
 *.ini
 
+
 !deps/glew/build
+deps/glew/build/*
+
+!deps/glew/build/cmake

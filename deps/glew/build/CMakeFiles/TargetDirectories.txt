@@ -1,3 +1,0 @@
-/home/eddie/Downloads/glew-2.2.0/build/CMakeFiles/glew.dir
-/home/eddie/Downloads/glew-2.2.0/build/CMakeFiles/edit_cache.dir
-/home/eddie/Downloads/glew-2.2.0/build/CMakeFiles/rebuild_cache.dir
