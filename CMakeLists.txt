@@ -20,8 +20,8 @@ add_library(GLBase STATIC ${GLBase_SOURCES})
     
 target_link_libraries(GLBase
     glew_s
-    imgui
     glfw
+    imgui
 )
 target_include_directories(GLBase PUBLIC ${INCLUDES})
 

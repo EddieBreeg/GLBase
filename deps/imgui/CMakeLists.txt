@@ -1,4 +1,4 @@
-include_directories("./include/imgui")
+
 
 set(IMGUI_SOURCES
     src/imgui.cpp
@@ -10,3 +10,7 @@ set(IMGUI_SOURCES
 )
 
 add_library(imgui STATIC ${IMGUI_SOURCES})
+target_include_directories(imgui PUBLIC 
+    "include/imgui"
+    "../glfw/include"
+)
