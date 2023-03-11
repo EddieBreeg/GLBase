@@ -4,6 +4,7 @@
 
 namespace GLBase
 {
+    // Represents an OpenGL framebuffer object
     class FrameBuffer
     {
     private:
@@ -11,11 +12,12 @@ namespace GLBase
         constexpr FrameBuffer(nullptr_t);
     public:
         FrameBuffer();
-        static FrameBuffer& defaultFrameBuffer();
         void bind() const;
         void unbind() const;
         void attachTexture2D(const Texture& tex, unsigned attachmentIndex);
+        // Returns the current status of the framebuffer, as returned by glCheckFramebufferStatus
         unsigned status() const;
+        // Returns a null terminated human readable string describing the current status
         static const char *statusString(unsigned status);
         ~FrameBuffer();
     };

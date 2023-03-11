@@ -4,6 +4,7 @@
 namespace GLBase
 {
     class GLBuffer
+    // Generic API for an OpenGL buffer object
     {
     private:
         unsigned _bufferId, _target;

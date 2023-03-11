@@ -11,10 +11,6 @@ namespace GLBase
     }
     constexpr FrameBuffer::FrameBuffer(nullptr_t)
     {}
-    FrameBuffer& FrameBuffer::defaultFrameBuffer(){
-        static FrameBuffer fbo(nullptr);
-        return fbo;
-    }
     void FrameBuffer::bind() const 
     {
         glCheckCall(glBindFramebuffer(GL_FRAMEBUFFER, _id));

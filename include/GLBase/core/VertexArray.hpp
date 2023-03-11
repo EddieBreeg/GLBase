@@ -9,12 +9,18 @@
 
 namespace GLBase
 {
+    // The interface for an OpenGL vertex array object
     class VertexArray
     {
     private:
         unsigned _arrayId;
     public:
         VertexArray();
+        /* Links the vertex array to a vertex buffer and a vertex layout
+        @tparam N: The number of attributes in the vertex layout
+        @param buff: The vertex buffer to link to
+        @param layout: The layout for the vertices in the buffer
+         */
         template<unsigned N>
         void addBuffer(const VertexBuffer& buff, const VertexLayout<N>& layout) const {
             bind();
