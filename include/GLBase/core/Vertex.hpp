@@ -5,17 +5,17 @@
 namespace GLBase
 {
     struct vec3{
-        double x, y, z;
-        vec3(double x=0, double y=0, double z=0): x(x), y(y), z(z){}
+        float x, y, z;
+        vec3(float x=0, float y=0, float z=0): x(x), y(y), z(z){}
         vec3 operator+(const vec3& other) const;
         vec3 operator-(const vec3& other) const;
         vec3 operator-() const;
-        vec3 operator*(double v) const;
-        vec3 operator/(double v) const;
-        vec3& operator/=(double v);
-        double dot(const vec3& other) const;
-        double squaredLength() const;
-        double length() const;
+        vec3 operator*(float v) const;
+        vec3 operator/(float v) const;
+        vec3& operator/=(float v);
+        float dot(const vec3& other) const;
+        float squaredLength() const;
+        float length() const;
         vec3 cross(const vec3& other) const;
         vec3 normalized() const;
     };

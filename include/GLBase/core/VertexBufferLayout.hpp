@@ -20,18 +20,20 @@ namespace GLBase
         /* Creates an object that represents a vertex attribute
         @tparam T: The underlying data type. Accepted types are float, double, unsigned int, short unsigned int, unsigned char
         @param n: The number of values of type T in the attribute
+        @attention Although double precision floats are accepted, they will be converted down to simple precision on the GPU
         @return An object representing the attribute
         */
         template<typename T>
         static VertexLayoutElement create(unsigned n);
+        // Returns the size of each value in the attribute (NOT the total size of the attribute itself)
         unsigned size() const {
             switch (_type)
             {
-                case FLOAT:     return _n * sizeof(float);
-                case DOUBLE:    return _n * sizeof(double);
-                case UINT:      return _n * sizeof(unsigned);
-                case USHORT:    return _n * sizeof(unsigned short);
-                case BYTE:      return _n;
+                case FLOAT:     return sizeof(float);
+                case DOUBLE:    return sizeof(double);
+                case UINT:      return sizeof(unsigned);
+                case USHORT:    return sizeof(unsigned short);
+                case BYTE:      return 1;
                 default: return 0;
             }
         }
@@ -39,7 +41,7 @@ namespace GLBase
         unsigned count() const { return _n; }
         // Returns the OpenGL value corresponding to the data type in the attribute
         int type() const { return _type; }
-        // Whether the attribute value is normalized
+        // Whether the attribute value is normalized. This is only true if the type is BYTE
         bool normalized() const { return _normalized; }
     };
     template<> inline VertexLayoutElement VertexLayoutElement::create<float>(unsigned n) { 
@@ -50,6 +52,9 @@ namespace GLBase
     }
     template<> inline VertexLayoutElement VertexLayoutElement::create<unsigned short>(unsigned n) { 
         return VertexLayoutElement(VertexLayoutElement::USHORT, n, false);
+    }
+    template<> inline VertexLayoutElement VertexLayoutElement::create<double>(unsigned n) { 
+        return VertexLayoutElement(VertexLayoutElement::DOUBLE, n, false);
     }
     template<> inline VertexLayoutElement VertexLayoutElement::create<unsigned char>(unsigned n) { 
         return VertexLayoutElement(VertexLayoutElement::BYTE, n, true);
@@ -72,10 +77,16 @@ namespace GLBase
         }
         // Returns the total size of the vertex
         unsigned stride() const {
-            unsigned s = 0;
-            for(const auto& e: _elements) 
-                s += e.size();
-            return s;
+            if(!N) return 0;
+            unsigned M = _elements[0].size();
+            unsigned stride = M * _elements[0].count();
+            for(unsigned i = 1; i < N; ++i){
+                unsigned eltSize = _elements[i].size();
+                unsigned padding = (eltSize - (stride % eltSize)) % eltSize;
+                M = eltSize > M? eltSize : M;
+                stride += padding + eltSize * _elements[i].count();
+            }
+            stride += (M - (stride % M)) % M; // align on the biggest element
         }
         // returns an iterator to the first element in the layout
         const VertexLayoutElement* begin() const { return _elements; }
