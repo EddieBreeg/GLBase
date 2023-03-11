@@ -29,10 +29,13 @@ namespace GLBase
             unsigned stride = layout.stride();
             for (unsigned i = 0; i < N; i++)
             {
-                const auto& e = layout[i];
+                const VertexLayoutElement& e = layout[i];
+                const unsigned eltSize = e.size();
+                const unsigned padding = (eltSize - (offset % eltSize)) % eltSize;
+                offset += padding;
                 glCheckCall(glVertexAttribPointer(i, e.count(), e.type(), e.normalized(), stride, (void*)offset))
                 glCheckCall(glEnableVertexAttribArray(i));
-                offset += e.size();
+                offset += e.size() * e.count();
             }
         }
         void bind() const;

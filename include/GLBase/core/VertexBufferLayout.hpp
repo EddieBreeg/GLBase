@@ -77,16 +77,16 @@ namespace GLBase
         }
         // Returns the total size of the vertex
         unsigned stride() const {
-            if(!N) return 0;
-            unsigned M = _elements[0].size();
-            unsigned stride = M * _elements[0].count();
-            for(unsigned i = 1; i < N; ++i){
-                unsigned eltSize = _elements[i].size();
+            unsigned M = 0;
+            unsigned stride = 0;
+            for(const VertexLayoutElement& elt: _elements){
+                unsigned eltSize = elt.size();
                 unsigned padding = (eltSize - (stride % eltSize)) % eltSize;
                 M = eltSize > M? eltSize : M;
-                stride += padding + eltSize * _elements[i].count();
+                stride += padding + eltSize * elt.count();
             }
             stride += (M - (stride % M)) % M; // align on the biggest element
+            return stride;
         }
         // returns an iterator to the first element in the layout
         const VertexLayoutElement* begin() const { return _elements; }
