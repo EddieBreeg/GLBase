@@ -316,6 +316,24 @@ namespace GLBase
     {
         return (M * x);
     }
+    Matrix33 operator/(const Matrix33& M, float_type x)
+    {
+        Matrix44 res;
+        ::mul(M._data, res._data, 1.0f / x);
+        return res;
+    }
+    Matrix34 operator/(const Matrix34& M, float_type x)
+    {
+        Matrix44 res;
+        ::mul(M._data, res._data, 1.0f / x);
+        return res;
+    }
+    Matrix44 operator/(const Matrix44& M, float_type x)
+    {
+        Matrix44 res;
+        ::mul(M._data, res._data, 1.0f / x);
+        return res;
+    }
     Matrix44 operator*(const Matrix44& A, const Matrix44 &B)
     {
        Matrix44 res;
@@ -361,5 +379,14 @@ namespace GLBase
             if(_data[i] != v[i]) return false;
         return true;
     }
+
+    Matrix44 orthographic(float xMin, float xMax, float yMin, float yMax, float zMin, float zMax) {
+        return Matrix44{
+            2.0f / (xMax - xMin), 0, 0, -(xMax + xMin) / (xMax - xMin),
+            0, 2.0f / (yMax - yMin), 0, -(yMax + yMin) / (yMax - yMin),
+            0, 0, 2.0f / (zMin - zMax), -(zMax + zMin) / (zMax - zMin),
+            0, 0, 0, 1
+        };
+    } 
 
 } // namespace GLBase

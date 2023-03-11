@@ -3,7 +3,7 @@
 #include <string_view>
 #include <unordered_map>
 #include <string>
-
+#include <GLBase/math/Matrix.hpp>
 
 namespace GLBase
 {
@@ -64,6 +64,7 @@ namespace GLBase
         void setUniform(std::string_view name, unsigned v0, unsigned v1);
         void setUniform(std::string_view name, unsigned v0, unsigned v1, unsigned v2);
         void setUniform(std::string_view name, unsigned v0, unsigned v1, unsigned v2, unsigned v3);
+        void setUniform(std::string_view name, const GLBase::Matrix44& M);
 
         /* Sets a callback function that will get called whenever a GLSL related error occurs
         @param cbk: A pointer to the function. This function must take the error message as the first argument, and takes a user defined pointer as a second argument

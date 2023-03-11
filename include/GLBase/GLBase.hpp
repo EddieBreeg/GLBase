@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string_view>
 #include "core/Renderer.hpp"
 #include "core/RNG.hpp"
 #include "core/FrameBuffer.hpp"
