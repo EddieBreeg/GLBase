@@ -128,12 +128,17 @@ namespace GLBase{
 
     Matrix33 operator*(const Matrix33& M, float_type x);
     Matrix33 operator*(float_type x, const Matrix33& M);
+    Matrix33 operator/(const Matrix33& M, float_type x);
+
     Matrix33 operator*(const Matrix33& A, const Matrix33& B);
     Matrix34 operator*(const Matrix34& M, float_type x);
     Matrix34 operator*(float_type x, const Matrix34& M);
+    Matrix34 operator/(const Matrix34& M, float_type x);
+
     Matrix44 operator*(const Matrix44& M, float_type x);
     Matrix44 operator*(float_type x, const Matrix44& M);
     Matrix44 operator*(const Matrix44& A, const Matrix44& B);
+    Matrix44 operator/(const Matrix44& M, float_type x);
     inline bool operator==(MatrixView v, const Matrix33& m){
         return m == v;
     }
@@ -146,4 +151,6 @@ namespace GLBase{
     inline bool operator!=(MatrixView v, const Matrix34& m){
         return !(m == v);
     }
+
+    Matrix44 orthographic(float xMin, float xMax, float yMin, float yMax, float zMin, float zMax);
 }

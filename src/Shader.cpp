@@ -183,4 +183,8 @@ namespace GLBase
     void Shader::setUniform(std::string_view name, unsigned v0, unsigned v1, unsigned v2, unsigned v3){
         glCheckCall(glUniform4ui(getUniformID(name), v0, v1, v2, v3));
     }
+    void Shader::setUniform(std::string_view name, const GLBase::Matrix44& M){
+        glCheckCall(glUniformMatrix4fv(getUniformID(name), 1, 1, M._data));
+    }
+    
 } // namespace GLBase
