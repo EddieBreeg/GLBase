@@ -1,5 +1,7 @@
 #pragma once
 
+#include "VertexBufferLayout.hpp"
+
 namespace GLBase
 {
     struct vec3{
@@ -18,6 +20,7 @@ namespace GLBase
         vec3 normalized() const;
     };
 
+    // A very basic 3D vertex structure
     struct Vertex3d
     {
         vec3 position, normal;
@@ -26,6 +29,14 @@ namespace GLBase
         Vertex3d(const vec3& position, const vec3& normal, const UV_coord& uv):
             position(position), normal(normal), uv(uv)
         {}
+        static VertexLayout<3> layout()
+        {
+            return VertexLayout<3>(
+                VertexLayoutElement::create<decltype(vec3::x)>(3),
+                VertexLayoutElement::create<decltype(vec3::x)>(3),
+                VertexLayoutElement::create<float>(2)
+            );
+        }
     };
 } // namespace GLBase
 

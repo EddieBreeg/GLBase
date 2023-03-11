@@ -7,7 +7,7 @@ namespace GLBase
         GLBuffer(data, sizeof(uint32_t) * count, GL_ELEMENT_ARRAY_BUFFER, usage), _count(count)
     {}
     void IndexBuffer::setIndexData(const uint32_t *data, unsigned count, unsigned usage){
-        setData(data, count*sizeof(uint32_t), usage);
+        setData(data, (_count = count)*sizeof(uint32_t), usage);
     }
     IndexBuffer::~IndexBuffer() {}
 

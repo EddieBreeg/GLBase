@@ -21,7 +21,8 @@ static inline GLuint setSource(GLuint shader, std::string_view source)
 {
     if(!shader) return 0;
     const char *str = source.data();
-    glShaderSource(shader, 1, &str, NULL);
+    int len = source.length();
+    glShaderSource(shader, 1, &str, &len);
     if(glLogError("glShaderSource(shader, 1, &str, NULL);", __FILE__, __LINE__))
     {
         glDeleteShader(shader);
